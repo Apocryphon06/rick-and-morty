@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./components/Card";
+import Pagination from "@mui/material/Pagination";
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+
+  const getData = () => {
+    axios
+      .get(`https://rickandmortyapi.com/api/character?page=${page}`)
+      .then((response: any) => {
+        console.log(response.data.info, "data from server");
+        let { info } = response.data;
+        setTotal(info.pages);
+        let { results } = response.data;
+        setData(results);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line 
+  }, [page]);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+    <div>
+      <div className="bg-white">
+        <p className="lg:text-7xl text-3xl font-bold text-center py-10 text-[#353535]">
+          Rick and Morty
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+
+      <div className="flex flex-col justify-center items-center p-5">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-5">
+          {data.map((item) => (
+            <Card key={item} data={item} />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center my-5">
+        <Pagination
+          page={page}
+          count={total}
+          variant="outlined"
+          onChange={handleChange}
+          shape={"rounded"}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
