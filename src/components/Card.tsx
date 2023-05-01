@@ -2,7 +2,7 @@ const Card = ({ data }: any) => {
   return (
     <div className="bg-gray-700 rounded shadow-xl flex lg:flex-row gap-5 items-center ">
       <img
-        className="lg:w-[170px] w-[140px] h-[140px] lg:h-[170px] lg:rounded-tl lg:rounded-bl lg:p-0 p-2"
+        className="w-[150px] h-[150px] rounded-full p-3"
         src={data.image}
         alt={data.image}
       />
