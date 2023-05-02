@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     getData();
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [page]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -55,6 +55,22 @@ const App = () => {
           shape={"rounded"}
         />
       </div>
+
+      {/* <div className="h-screen w-screen snap-y snap-mandatory overflow-scroll">
+        <div className="h-screen w-screen snap-start flex justify-center items-center">
+          <img src="https://picsum.photos/500" alt="image1" />
+        </div>
+        <div className="h-screen w-screen snap-start flex justify-center items-center">
+          <img src="https://picsum.photos/500" alt="image1" />
+        </div>
+        <div className="h-screen w-screen snap-start flex justify-center items-center">
+          <img src="https://picsum.photos/500" alt="image1" />
+        </div>
+      </div>
+
+      <div className="text-8xl h-screen w-screen flex justify-center items-center bg-amber-300 text-[#323232] font-medium uppercase">
+        hello world
+      </div> */}
     </div>
   );
 };
